@@ -1,103 +1,314 @@
 <!doctype html>
 <html lang="ko">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>KT1 접수 링크</title>
-<style>
-  :root { --bg:#f4f7fb; --card:#ffffff; --ink:#172033; --muted:#667085; --line:#e4e9f2; --blue:#2563eb; --blue2:#1d4ed8; --green:#16a34a; }
-  * { box-sizing:border-box; }
-  body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",Arial,sans-serif; background:var(--bg); color:var(--ink); }
-  .wrap { max-width:760px; margin:0 auto; padding:18px 14px 42px; }
-  .hero { background:linear-gradient(135deg,#1e40af,#60a5fa); color:white; border-radius:22px; padding:22px 18px; box-shadow:0 12px 28px rgba(37,99,235,.22); }
-  .hero h1 { margin:0 0 6px; font-size:25px; letter-spacing:-.6px; }
-  .hero p { margin:0; font-size:14px; opacity:.92; line-height:1.45; }
-  .search { position:sticky; top:0; z-index:5; padding:12px 0; background:linear-gradient(var(--bg) 70%, rgba(244,247,251,0)); }
-  .search input { width:100%; border:1px solid var(--line); background:white; border-radius:16px; padding:15px 15px; font-size:16px; outline:none; box-shadow:0 6px 18px rgba(16,24,40,.05); }
-  .search input:focus { border-color:#93c5fd; box-shadow:0 0 0 4px rgba(37,99,235,.12); }
-  details { background:var(--card); border:1px solid var(--line); border-radius:18px; margin:10px 0; overflow:hidden; box-shadow:0 6px 16px rgba(16,24,40,.045); }
-  summary { cursor:pointer; list-style:none; padding:16px 16px; font-weight:800; display:flex; justify-content:space-between; align-items:center; }
-  summary::-webkit-details-marker { display:none; }
-  .count { color:var(--muted); font-weight:700; font-size:13px; }
-  .items { padding:0 12px 12px; display:grid; gap:8px; }
-  .item { border:1px solid var(--line); border-radius:15px; padding:11px; background:#fbfdff; }
-  .top { display:flex; gap:8px; align-items:center; justify-content:space-between; margin-bottom:8px; }
-  .code { font-size:15px; font-weight:900; letter-spacing:.1px; }
-  .url { color:var(--muted); font-size:11.5px; word-break:break-all; line-height:1.35; margin-bottom:10px; }
-  .btns { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
-  button, a.btn { border:0; border-radius:12px; padding:11px 10px; font-size:14px; font-weight:800; text-align:center; text-decoration:none; cursor:pointer; }
-  .copy { background:#eaf1ff; color:var(--blue2); }
-  .open { background:var(--blue); color:white; }
-  .copy.ok { background:#dcfce7; color:var(--green); }
-  .empty { text-align:center; color:var(--muted); padding:30px 8px; display:none; }
-  .notice { color:var(--muted); font-size:12px; line-height:1.45; padding:4px 4px 0; }
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>KT1 접수 링크</title>
+  <style>
+    :root {
+      --bg:#f4f7fb;
+      --card:#ffffff;
+      --ink:#1f2937;
+      --muted:#6b7280;
+      --line:#dbe3ef;
+      --primary:#2563eb;
+      --primary-dark:#1d4ed8;
+      --soft:#eaf1ff;
+      --success:#10b981;
+    }
+    * { box-sizing:border-box; }
+    body {
+      margin:0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", Arial, sans-serif;
+      color:var(--ink);
+      background:linear-gradient(180deg,#eaf2ff 0%, var(--bg) 240px);
+    }
+    .wrap {
+      width:min(920px, 100%);
+      margin:0 auto;
+      padding:20px 14px 60px;
+    }
+    header {
+      padding:18px 4px 16px;
+    }
+    h1 {
+      margin:0;
+      font-size:26px;
+      letter-spacing:-0.04em;
+    }
+    .sub {
+      margin-top:8px;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.45;
+    }
+    .toolbar {
+      position:sticky;
+      top:0;
+      z-index:10;
+      background:rgba(244,247,251,.92);
+      backdrop-filter:blur(10px);
+      padding:10px 0 12px;
+      border-bottom:1px solid rgba(219,227,239,.7);
+    }
+    .searchbox {
+      display:flex;
+      gap:8px;
+      align-items:center;
+    }
+    input[type="search"] {
+      width:100%;
+      border:1px solid var(--line);
+      background:#fff;
+      border-radius:14px;
+      padding:13px 14px;
+      font-size:16px;
+      outline:none;
+      box-shadow:0 8px 22px rgba(30,64,175,.06);
+    }
+    .miniBtns {
+      display:flex;
+      gap:8px;
+      margin-top:10px;
+    }
+    .miniBtns button {
+      flex:1;
+      border:1px solid var(--line);
+      background:#fff;
+      color:#334155;
+      border-radius:12px;
+      padding:10px;
+      font-weight:700;
+    }
+    .stats {
+      margin:12px 4px 10px;
+      color:var(--muted);
+      font-size:13px;
+    }
+    details {
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:18px;
+      margin:10px 0;
+      overflow:hidden;
+      box-shadow:0 10px 24px rgba(15,23,42,.05);
+    }
+    summary {
+      list-style:none;
+      cursor:pointer;
+      padding:16px 16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      font-weight:900;
+      letter-spacing:-0.03em;
+      user-select:none;
+    }
+    summary::-webkit-details-marker { display:none; }
+    .count {
+      color:var(--primary);
+      background:var(--soft);
+      padding:5px 9px;
+      border-radius:999px;
+      font-size:12px;
+      white-space:nowrap;
+    }
+    .items {
+      border-top:1px solid var(--line);
+      padding:10px;
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0,1fr));
+      gap:10px;
+    }
+    .item {
+      border:1px solid #edf1f7;
+      border-radius:16px;
+      padding:12px;
+      background:#fbfdff;
+    }
+    .model {
+      font-size:15px;
+      font-weight:900;
+      letter-spacing:-0.02em;
+      margin-bottom:10px;
+      word-break:break-all;
+    }
+    .actions {
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:8px;
+    }
+    .btn {
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:40px;
+      border-radius:12px;
+      border:0;
+      text-decoration:none;
+      font-weight:900;
+      font-size:14px;
+      cursor:pointer;
+    }
+    .open {
+      background:var(--primary);
+      color:#fff;
+    }
+    .copy {
+      background:#eef2f7;
+      color:#1f2937;
+    }
+    .open:active { background:var(--primary-dark); }
+    .toast {
+      position:fixed;
+      left:50%;
+      bottom:24px;
+      transform:translateX(-50%) translateY(20px);
+      background:#111827;
+      color:white;
+      padding:12px 16px;
+      border-radius:999px;
+      font-size:14px;
+      opacity:0;
+      pointer-events:none;
+      transition:.22s ease;
+      box-shadow:0 12px 30px rgba(0,0,0,.25);
+      z-index:30;
+      white-space:nowrap;
+    }
+    .toast.show {
+      opacity:1;
+      transform:translateX(-50%) translateY(0);
+    }
+    .empty {
+      display:none;
+      margin:20px 4px;
+      padding:22px;
+      background:#fff;
+      border:1px dashed var(--line);
+      border-radius:18px;
+      color:var(--muted);
+      text-align:center;
+    }
+    footer {
+      margin-top:18px;
+      color:#94a3b8;
+      font-size:12px;
+      text-align:center;
+    }
+    .toolbar.no-search { justify-content:flex-end; }
+    @media (max-width:640px) {
+      .wrap { padding:16px 12px 44px; }
+      h1 { font-size:23px; }
+      .items { grid-template-columns:1fr; }
+      summary { padding:15px 14px; }
+    }
+  </style>
 </head>
 <body>
-<div class="wrap">
-  <section class="hero">
-    <h1>KT1 접수 링크</h1>
-    <p>기종명을 검색하거나 시리즈를 열어서 접수 링크를 선택하세요.</p>
-  </section>
-  <div class="search"><input id="q" type="search" placeholder="기종 검색 예: S942, F766, AIP17" autocomplete="off"></div>
-  <div id="list"></div>
-  <div id="empty" class="empty">검색 결과가 없습니다.</div>
-  <p class="notice">※ 복사 버튼은 링크 전체를 클립보드에 복사합니다. 카카오톡 안에서 주소가 자동 링크 처리될 때는 이 페이지 버튼을 사용하세요.</p>
-</div>
-<script>
-const DATA = [{"name": "iPhone 13", "items": [{"code": "AIP13-128", "url": "http://online.kt.com/index.jsp?prdcID=3B6C5B64-08A4-4E5A-AFF5-C5EDFF2C9DB9"}, {"code": "AIP13-256", "url": "http://online.kt.com/index.jsp?prdcID=59C7A7C4-7E6A-4685-A511-A023F23D0AED"}, {"code": "AIP13-512", "url": "http://online.kt.com/index.jsp?prdcID=94ACB50F-6166-4F21-9FF0-9D34BBB9C04D"}]}, {"name": "iPhone 15", "items": [{"code": "AIP15-128", "url": "http://online.kt.com/index.jsp?prdcID=5638036D-BAD4-4EAD-AFE9-EEE419711AA0"}, {"code": "AIP15-256", "url": "http://online.kt.com/index.jsp?prdcID=AA686BE4-27D1-4170-B78E-D31A978469CB"}, {"code": "AIP15-512", "url": "http://online.kt.com/index.jsp?prdcID=6A22C919-234A-478E-95DA-65716FE7696F"}, {"code": "AIP15P-128", "url": "http://online.kt.com/index.jsp?prdcID=593D3D84-1459-44D4-BD80-E57A9E0CD092"}, {"code": "AIP15P-1T", "url": "http://online.kt.com/index.jsp?prdcID=28899435-EB82-473B-BD4D-9F81FB41555C"}, {"code": "AIP15P-256", "url": "http://online.kt.com/index.jsp?prdcID=0678BAEF-8760-48A3-AFAA-18FAEEF9FF87"}, {"code": "AIP15P-512", "url": "http://online.kt.com/index.jsp?prdcID=0C67B950-A36B-4D34-B84D-4CFEBFD894BF"}, {"code": "AIP15PM-1T", "url": "http://online.kt.com/index.jsp?prdcID=50A4977B-C2CE-40F7-AEBE-412E1EF06B8C"}, {"code": "AIP15PM-256", "url": "http://online.kt.com/index.jsp?prdcID=66F83FD8-4DC9-4B2D-B839-B51A3F4FF204"}, {"code": "AIP15PM-512", "url": "http://online.kt.com/index.jsp?prdcID=7042F92F-FF1F-4679-99C2-0A2BD70DE768"}, {"code": "AIP15PS-128", "url": "http://online.kt.com/index.jsp?prdcID=9CF8A097-1CDE-409D-95AA-CF282C340FE0"}, {"code": "AIP15PS-256", "url": "http://online.kt.com/index.jsp?prdcID=496109EB-CA86-422D-879C-6A1BF6A96DA0"}, {"code": "AIP15PS-512", "url": "http://online.kt.com/index.jsp?prdcID=E03665F9-C3DD-4531-BE54-DEBC2E552F2E"}]}, {"name": "iPhone 16", "items": [{"code": "AIP16-128", "url": "http://online.kt.com/index.jsp?prdcID=A19E3B0C-77A0-4B5B-BFA2-8BB40AD790C6"}, {"code": "AIP16-256", "url": "http://online.kt.com/index.jsp?prdcID=E6DF452D-B09C-49AD-B5A9-342409E3842C"}, {"code": "AIP16-512", "url": "http://online.kt.com/index.jsp?prdcID=E9CBA8A0-E0AB-46A5-A9E1-66DC80FA57C2"}, {"code": "AIP16P-128", "url": "http://online.kt.com/index.jsp?prdcID=A37F7040-75C1-4251-ABAE-5E9A2572C121"}, {"code": "AIP16P-1T", "url": "http://online.kt.com/index.jsp?prdcID=41B896C7-2CB5-4CC5-8DD2-2335AA4F971F"}, {"code": "AIP16P-256", "url": "http://online.kt.com/index.jsp?prdcID=F713A4B3-A284-4869-BFDB-FE753B82983D"}, {"code": "AIP16P-512", "url": "http://online.kt.com/index.jsp?prdcID=B48C7B93-D32B-45BC-B837-420C1903C5E0"}, {"code": "AIP16PM-1T", "url": "http://online.kt.com/index.jsp?prdcID=FB0DC750-02DA-4097-BB1B-AECEA5AB4C4D"}, {"code": "AIP16PM-256", "url": "http://online.kt.com/index.jsp?prdcID=694F7B38-0E2F-4BBD-A298-5F28695D8601"}, {"code": "AIP16PM-512", "url": "http://online.kt.com/index.jsp?prdcID=4AAA84AB-80C6-4DB0-B7C8-C8A4E0B3C527"}, {"code": "AIP16PS-128", "url": "http://online.kt.com/index.jsp?prdcID=2BE107E0-D56F-4DE4-8704-C75D4BF5E49F"}, {"code": "AIP16PS-256", "url": "http://online.kt.com/index.jsp?prdcID=79FCFFE0-9642-43DE-9978-CC91475844CE"}, {"code": "AIP16PS-512", "url": "http://online.kt.com/index.jsp?prdcID=3801A271-B970-4C17-9212-A127CA5AFAE9"}]}, {"name": "iPhone 17", "items": [{"code": "AIP17-256", "url": "http://online.kt.com/index.jsp?prdcID=3FA98EC9-B8D5-4393-B6A0-E83DE28863F6"}, {"code": "AIP17-512", "url": "http://online.kt.com/index.jsp?prdcID=FFA57533-8316-4CA2-92B7-899C925E9D57"}, {"code": "AIP17P-1T", "url": "http://online.kt.com/index.jsp?prdcID=FB008D7D-8B15-4BE0-B44D-543DB642A229"}, {"code": "AIP17P-256", "url": "http://online.kt.com/index.jsp?prdcID=94085AF0-5EDB-40E5-B241-A83F31A7DB01"}, {"code": "AIP17P-512", "url": "http://online.kt.com/index.jsp?prdcID=A0089DDE-7609-41BE-BC58-259C11823B0B"}, {"code": "AIP17PM-1T", "url": "http://online.kt.com/index.jsp?prdcID=15D0B833-DAAB-4232-A96F-24F82CF07AEA"}, {"code": "AIP17PM-256", "url": "http://online.kt.com/index.jsp?prdcID=C3FA4A96-E80A-4E1A-9B7D-6DC734AD2CF5"}, {"code": "AIP17PM-2T", "url": "http://online.kt.com/index.jsp?prdcID=F1611953-2B22-4A55-8A96-06F54E0DE2EE"}, {"code": "AIP17PM-512", "url": "http://online.kt.com/index.jsp?prdcID=A127E1D4-305A-4284-AC54-E23175F29B6B"}]}, {"name": "iPad / Apple 기타", "items": [{"code": "AIPA-1T", "url": "http://online.kt.com/index.jsp?prdcID=46F2BDEE-1089-47D0-8BC5-16D03172DFF7"}, {"code": "AIPA-256", "url": "http://online.kt.com/index.jsp?prdcID=85385A34-8713-4386-BFAD-CB95808D6E2E"}, {"code": "AIPA-512", "url": "http://online.kt.com/index.jsp?prdcID=4C6FB7D6-76B7-4291-AE90-8509D6DFB3AE"}]}, {"name": "Galaxy S23", "items": [{"code": "SM-S911NK", "url": "http://online.kt.com/index.jsp?prdcID=BE32D4CB-3379-4336-B2A9-0AAF85B78C5A"}, {"code": "SM-S911NK512", "url": "http://online.kt.com/index.jsp?prdcID=DACF47F6-B5DB-47CC-905B-36C889FAF31E"}, {"code": "SM-S916NK", "url": "http://online.kt.com/index.jsp?prdcID=11B75870-094A-4BF7-BAC5-B2CE275CD9FC"}, {"code": "SM-S916NK512", "url": "http://online.kt.com/index.jsp?prdcID=164A21BE-3C79-4C8B-90A0-E85E4EEA498F"}, {"code": "SM-S918NK", "url": "http://online.kt.com/index.jsp?prdcID=316573F1-A36B-434C-BB27-EF45714A05F1"}, {"code": "SM-S918NK512", "url": "http://online.kt.com/index.jsp?prdcID=5824D978-D135-4796-B151-AD084790916D"}]}, {"name": "Galaxy S24 / FE", "items": [{"code": "SM-S721NK", "url": "http://online.kt.com/index.jsp?prdcID=F0A65BD3-AF1C-4AC6-9BF8-D321F01EDD34"}, {"code": "SM-S921NK", "url": "http://online.kt.com/index.jsp?prdcID=8FC19621-D09B-41C8-B048-549993C31F28"}, {"code": "SM-S921NK512", "url": "http://online.kt.com/index.jsp?prdcID=4CCEE2AD-0521-4306-88D5-B248DE9C5C86"}, {"code": "SM-S926NK", "url": "http://online.kt.com/index.jsp?prdcID=6AD57EE2-2076-4DFD-8179-21B307E6AABD"}, {"code": "SM-S926NK512", "url": "http://online.kt.com/index.jsp?prdcID=0E0B0901-F3CE-409D-9A11-865BA79CC5A4"}, {"code": "SM-S928NK", "url": "http://online.kt.com/index.jsp?prdcID=050162F9-76B4-4B4D-931D-5DC36FD37AD3"}, {"code": "SM-S928NK1T", "url": "http://online.kt.com/index.jsp?prdcID=11106EB3-7914-40DE-9423-6BF059E6D7EF"}, {"code": "SM-S928NK512", "url": "http://online.kt.com/index.jsp?prdcID=1DCFED43-AA88-4665-9963-097B0D6035D7"}]}, {"name": "Galaxy S25 / FE", "items": [{"code": "SM-S731NK", "url": "http://online.kt.com/index.jsp?prdcID=E9A8FD4C-3017-470D-9B82-FAFEED21FC84"}, {"code": "SM-S931NK", "url": "http://online.kt.com/index.jsp?prdcID=131E390C-46BA-44FC-A237-6BEE6D5AABC6"}, {"code": "SM-S931NK512", "url": "http://online.kt.com/index.jsp?prdcID=BD07DCE1-90A2-4059-82D6-8AB1BBAC6EF9"}, {"code": "SM-S936NK", "url": "http://online.kt.com/index.jsp?prdcID=2D993B4C-7A07-4840-AAF9-BD0F257D9B36"}, {"code": "SM-S936NK512", "url": "http://online.kt.com/index.jsp?prdcID=379B2609-09D2-4A11-8E87-17D6DB89DB0C"}, {"code": "SM-S937NK", "url": "http://online.kt.com/index.jsp?prdcID=727A6B26-3C6A-4734-8CD0-7A4B8F106B9B"}, {"code": "SM-S937NK512", "url": "http://online.kt.com/index.jsp?prdcID=321B2554-76DA-4260-8425-E4EEC5757AAD"}, {"code": "SM-S938NK", "url": "http://online.kt.com/index.jsp?prdcID=DD379671-BC3D-43D5-AC97-10B5793A00F7"}, {"code": "SM-S938NK1T", "url": "http://online.kt.com/index.jsp?prdcID=DE2DAA7C-9C53-4EF8-AB22-040246336FB1"}, {"code": "SM-S938NK512", "url": "http://online.kt.com/index.jsp?prdcID=CD75C06E-DCD8-4936-8353-B80F91C816CE"}]}, {"name": "Galaxy S26", "items": [{"code": "SM-S942NK", "url": "http://online.kt.com/index.jsp?prdcID=BE3B5164-6F2A-463F-81F2-C0CB0C6F2A15"}, {"code": "SM-S942NK512", "url": "http://online.kt.com/index.jsp?prdcID=7E0F0D46-749D-48D7-907A-B5D710E9BFAB"}, {"code": "SM-S947NK", "url": "http://online.kt.com/index.jsp?prdcID=D3650420-4496-4BF6-9576-1B32CC8DEA97"}, {"code": "SM-S947NK512", "url": "http://online.kt.com/index.jsp?prdcID=0CF1D681-43E5-40A8-A466-FA3C81492719"}, {"code": "SM-S948NK", "url": "http://online.kt.com/index.jsp?prdcID=AE7428E0-0618-418B-AF79-AFDD3E482011"}, {"code": "SM-S948NK1T", "url": "http://online.kt.com/index.jsp?prdcID=905258C9-C10A-4D74-89EE-9183280B33F0"}, {"code": "SM-S948NK512", "url": "http://online.kt.com/index.jsp?prdcID=1DDDBE90-7108-433B-AC77-8716BDD8F92B"}]}, {"name": "Galaxy Z Flip5", "items": [{"code": "SM-F731NK", "url": "http://online.kt.com/index.jsp?prdcID=47E8F45B-9E7A-4404-B00E-8CBB90DB80FE"}, {"code": "SM-F731NK512", "url": "http://online.kt.com/index.jsp?prdcID=5B684399-4BD5-44E0-8D6F-69C1C1B8C3FD"}]}, {"name": "Galaxy Z Flip6", "items": [{"code": "SM-F741NK", "url": "http://online.kt.com/index.jsp?prdcID=74D0C141-616A-48D4-9AD9-B426E90A9DE6"}, {"code": "SM-F741NK512", "url": "http://online.kt.com/index.jsp?prdcID=E3A58B79-E28A-4001-B3D3-1C96AAB71917"}]}, {"name": "Galaxy Z Flip7", "items": [{"code": "SM-F761NK", "url": "http://online.kt.com/index.jsp?prdcID=AF5556B0-C8E6-4B6C-8C69-08E755D13407"}, {"code": "SM-F766NK", "url": "http://online.kt.com/index.jsp?prdcID=4584A0FC-9DDB-47F8-BE25-7299F20C51C7"}, {"code": "SM-F766NK512", "url": "http://online.kt.com/index.jsp?prdcID=CED07BDE-6B21-4DEF-A82B-A4C87864EF9B"}]}, {"name": "Galaxy Z Fold5", "items": [{"code": "SM-F946NK", "url": "http://online.kt.com/index.jsp?prdcID=4CA4C481-948E-4790-9253-7928EA888DB6"}, {"code": "SM-F946NK512", "url": "http://online.kt.com/index.jsp?prdcID=52E57C75-907C-424F-96FA-A977509BCA48"}]}, {"name": "Galaxy Z Fold6", "items": [{"code": "SM-F956NK", "url": "http://online.kt.com/index.jsp?prdcID=E6BBE7AE-9E0F-47EB-942D-A61CC3D5A234"}, {"code": "SM-F956NK1T", "url": "http://online.kt.com/index.jsp?prdcID=5F83919C-5DE3-4D87-BFD2-980C5ECEC3F4"}, {"code": "SM-F956NK512", "url": "http://online.kt.com/index.jsp?prdcID=D2E30A6C-BFC3-4DFD-B39A-CDCA58D4C2D5"}]}, {"name": "Galaxy Z Fold7", "items": [{"code": "SM-F966NK", "url": "http://online.kt.com/index.jsp?prdcID=2D01E689-CDDC-469D-83A0-7902F14A9C42"}, {"code": "SM-F966NK1T", "url": "http://online.kt.com/index.jsp?prdcID=34CD1D2B-9B14-48DC-8D60-E7941767AFB1"}, {"code": "SM-F966NK512", "url": "http://online.kt.com/index.jsp?prdcID=9A4E06AC-243B-438F-BD55-C3AB27CD1587"}]}, {"name": "Galaxy A/M 보급형", "items": [{"code": "SM-A155NK", "url": "http://online.kt.com/index.jsp?prdcID=73648F3C-2894-4B37-81AF-F45EEC1A6A8F"}, {"code": "SM-A165NK", "url": "http://online.kt.com/index.jsp?prdcID=E9190ACD-2A7D-4C66-8494-01B9AD1C2B39"}, {"code": "SM-A165NK-KP", "url": "http://online.kt.com/index.jsp?prdcID=741B4F70-CA69-4F0B-A35D-FD81AEE44BC1"}, {"code": "SM-M366K-MOM", "url": "http://online.kt.com/index.jsp?prdcID=B7458CE0-7E16-4300-909F-82734039A4EF"}]}, {"name": "Galaxy Watch / Wearable", "items": [{"code": "SM-L305NK", "url": "http://online.kt.com/index.jsp?prdcID=B3BC755C-09A6-4000-AF85-DF9BBD370885"}, {"code": "SM-L315NK", "url": "http://online.kt.com/index.jsp?prdcID=E0DFA6B7-3682-45F6-800F-F9E88B4AE2D3"}, {"code": "SM-L325NK", "url": "http://online.kt.com/index.jsp?prdcID=064D06DA-CD07-40A3-BCDE-C65F74E85F41"}, {"code": "SM-L335NK", "url": "http://online.kt.com/index.jsp?prdcID=677A315F-2E35-429B-8AD7-246EDC7897E5"}, {"code": "SM-L505NK", "url": "http://online.kt.com/index.jsp?prdcID=1EAB6D02-A4CE-4392-9FD2-8EB8581AE313"}, {"code": "SM-L705NK", "url": "http://online.kt.com/index.jsp?prdcID=9B0F28F7-DD7A-4C5B-BB81-13061CC11FD0"}, {"code": "SM-R905NK", "url": "http://online.kt.com/index.jsp?prdcID=BA844BD1-BA58-49C7-82EB-7456FA8D8C09"}, {"code": "SM-R915NK", "url": "http://online.kt.com/index.jsp?prdcID=2A72D93F-F730-4D51-8B32-43204E17F12B"}, {"code": "SM-R935NK", "url": "http://online.kt.com/index.jsp?prdcID=CC71B6F1-1AAF-4D3D-9420-81F076F3FBD7"}, {"code": "SM-R945NK", "url": "http://online.kt.com/index.jsp?prdcID=6C87BFDE-AF68-4804-9591-24F32C9D9B78"}, {"code": "SM-R955NK", "url": "http://online.kt.com/index.jsp?prdcID=53CD5B47-FECD-468F-856C-5D7CE0607B01"}, {"code": "SM-R965NK", "url": "http://online.kt.com/index.jsp?prdcID=13DF835B-F9D1-4D26-81FC-5F5DF6B4F29F"}]}, {"name": "기타 접수", "items": [{"code": "유선", "url": "https://online.kt.com/itg/simple/simpleCustomerInfoPop.do?prdcId=225089A4-297C-49F6-B5DF-8226D48543BB"}, {"code": "유심단독", "url": "http://online.kt.com/index.jsp?prdcID=AFB53030-8E5D-4469-ABB4-2C1250CF803D"}]}, {"name": "기타 기종", "items": [{"code": "AT-M130K", "url": "http://online.kt.com/index.jsp?prdcID=AAE56174-D6CC-4FD1-8B4A-0FDBFF85F131"}, {"code": "MI-RMN13P5GK512", "url": "http://online.kt.com/index.jsp?prdcID=90ED6884-46A4-4C10-B263-849B05716CD6"}]}];
-const list = document.getElementById('list');
-const q = document.getElementById('q');
-const empty = document.getElementById('empty');
+  <div class="wrap">
+    <header>
+      <h1>KT1 접수 링크</h1>
+      <div class="sub">시리즈를 펼쳐서 접수 링크를 열어주세요.</div>
+    </header>
 
-function esc(s) { return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
-function render(keyword='') {
-  const key = keyword.trim().toLowerCase();
-  list.innerHTML = '';
-  let shown = 0;
-  DATA.forEach((group, idx) => {
-    const items = group.items.filter(it => !key || it.code.toLowerCase().includes(key) || it.url.toLowerCase().includes(key));
-    if (!items.length) return;
-    shown += items.length;
-    const d = document.createElement('details');
-    if (key || idx < 2) d.open = true;
-    d.innerHTML = `<summary><span>${esc(group.name)}</span><span class="count">${items.length}개</span></summary><div class="items"></div>`;
-    const box = d.querySelector('.items');
-    items.forEach(it => {
-      const div = document.createElement('div');
-      div.className = 'item';
-      div.innerHTML = `
-        <div class="top"><div class="code">${esc(it.code)}</div></div>
-        <div class="url">${esc(it.url)}</div>
-        <div class="btns">
-          <button class="copy" type="button" data-url="${esc(it.url)}">링크 복사</button>
-          <a class="btn open" href="${esc(it.url)}" target="_blank" rel="noopener">접수 열기</a>
-        </div>`;
-      box.appendChild(div);
-    });
-    list.appendChild(d);
-  });
-  empty.style.display = shown ? 'none' : 'block';
+    <div class="toolbar no-search">
+      <div class="miniBtns">
+        <button type="button" id="openAll">모두 펼치기</button>
+        <button type="button" id="closeAll">모두 접기</button>
+      </div>
+    </div>
+
+    <div class="stats" id="stats"></div>
+    <main id="list"></main>
+    <div class="empty" id="empty">검색 결과가 없습니다.</div>
+    <footer>KT1 링크 모음</footer>
+  </div>
+
+  <div class="toast" id="toast">복사 완료</div>
+
+<script>
+const DATA = [{"name": "아이폰 13 시리즈", "items": [{"model": "AIP13-128", "url": "http://online.kt.com/index.jsp?prdcID=3B6C5B64-08A4-4E5A-AFF5-C5EDFF2C9DB9"}, {"model": "AIP13-256", "url": "http://online.kt.com/index.jsp?prdcID=59C7A7C4-7E6A-4685-A511-A023F23D0AED"}, {"model": "AIP13-512", "url": "http://online.kt.com/index.jsp?prdcID=94ACB50F-6166-4F21-9FF0-9D34BBB9C04D"}]}, {"name": "아이폰 15 시리즈", "items": [{"model": "AIP15-128", "url": "http://online.kt.com/index.jsp?prdcID=5638036D-BAD4-4EAD-AFE9-EEE419711AA0"}, {"model": "AIP15-256", "url": "http://online.kt.com/index.jsp?prdcID=AA686BE4-27D1-4170-B78E-D31A978469CB"}, {"model": "AIP15-512", "url": "http://online.kt.com/index.jsp?prdcID=6A22C919-234A-478E-95DA-65716FE7696F"}, {"model": "AIP15P-1T", "url": "http://online.kt.com/index.jsp?prdcID=28899435-EB82-473B-BD4D-9F81FB41555C"}, {"model": "AIP15P-128", "url": "http://online.kt.com/index.jsp?prdcID=593D3D84-1459-44D4-BD80-E57A9E0CD092"}, {"model": "AIP15P-256", "url": "http://online.kt.com/index.jsp?prdcID=0678BAEF-8760-48A3-AFAA-18FAEEF9FF87"}, {"model": "AIP15P-512", "url": "http://online.kt.com/index.jsp?prdcID=0C67B950-A36B-4D34-B84D-4CFEBFD894BF"}, {"model": "AIP15PM-1T", "url": "http://online.kt.com/index.jsp?prdcID=50A4977B-C2CE-40F7-AEBE-412E1EF06B8C"}, {"model": "AIP15PM-256", "url": "http://online.kt.com/index.jsp?prdcID=66F83FD8-4DC9-4B2D-B839-B51A3F4FF204"}, {"model": "AIP15PM-512", "url": "http://online.kt.com/index.jsp?prdcID=7042F92F-FF1F-4679-99C2-0A2BD70DE768"}, {"model": "AIP15PS-128", "url": "http://online.kt.com/index.jsp?prdcID=9CF8A097-1CDE-409D-95AA-CF282C340FE0"}, {"model": "AIP15PS-256", "url": "http://online.kt.com/index.jsp?prdcID=496109EB-CA86-422D-879C-6A1BF6A96DA0"}, {"model": "AIP15PS-512", "url": "http://online.kt.com/index.jsp?prdcID=E03665F9-C3DD-4531-BE54-DEBC2E552F2E"}]}, {"name": "아이폰 16 시리즈", "items": [{"model": "AIP16-128", "url": "http://online.kt.com/index.jsp?prdcID=A19E3B0C-77A0-4B5B-BFA2-8BB40AD790C6"}, {"model": "AIP16-256", "url": "http://online.kt.com/index.jsp?prdcID=E6DF452D-B09C-49AD-B5A9-342409E3842C"}, {"model": "AIP16-512", "url": "http://online.kt.com/index.jsp?prdcID=E9CBA8A0-E0AB-46A5-A9E1-66DC80FA57C2"}, {"model": "AIP16P-1T", "url": "http://online.kt.com/index.jsp?prdcID=41B896C7-2CB5-4CC5-8DD2-2335AA4F971F"}, {"model": "AIP16P-128", "url": "http://online.kt.com/index.jsp?prdcID=A37F7040-75C1-4251-ABAE-5E9A2572C121"}, {"model": "AIP16P-256", "url": "http://online.kt.com/index.jsp?prdcID=F713A4B3-A284-4869-BFDB-FE753B82983D"}, {"model": "AIP16P-512", "url": "http://online.kt.com/index.jsp?prdcID=B48C7B93-D32B-45BC-B837-420C1903C5E0"}, {"model": "AIP16PM-1T", "url": "http://online.kt.com/index.jsp?prdcID=FB0DC750-02DA-4097-BB1B-AECEA5AB4C4D"}, {"model": "AIP16PM-256", "url": "http://online.kt.com/index.jsp?prdcID=694F7B38-0E2F-4BBD-A298-5F28695D8601"}, {"model": "AIP16PM-512", "url": "http://online.kt.com/index.jsp?prdcID=4AAA84AB-80C6-4DB0-B7C8-C8A4E0B3C527"}, {"model": "AIP16PS-128", "url": "http://online.kt.com/index.jsp?prdcID=2BE107E0-D56F-4DE4-8704-C75D4BF5E49F"}, {"model": "AIP16PS-256", "url": "http://online.kt.com/index.jsp?prdcID=79FCFFE0-9642-43DE-9978-CC91475844CE"}, {"model": "AIP16PS-512", "url": "http://online.kt.com/index.jsp?prdcID=3801A271-B970-4C17-9212-A127CA5AFAE9"}]}, {"name": "아이폰 17 시리즈", "items": [{"model": "AIP17-256", "url": "http://online.kt.com/index.jsp?prdcID=3FA98EC9-B8D5-4393-B6A0-E83DE28863F6"}, {"model": "AIP17-512", "url": "http://online.kt.com/index.jsp?prdcID=FFA57533-8316-4CA2-92B7-899C925E9D57"}, {"model": "AIP17P-1T", "url": "http://online.kt.com/index.jsp?prdcID=FB008D7D-8B15-4BE0-B44D-543DB642A229"}, {"model": "AIP17P-256", "url": "http://online.kt.com/index.jsp?prdcID=94085AF0-5EDB-40E5-B241-A83F31A7DB01"}, {"model": "AIP17P-512", "url": "http://online.kt.com/index.jsp?prdcID=A0089DDE-7609-41BE-BC58-259C11823B0B"}, {"model": "AIP17PM-1T", "url": "http://online.kt.com/index.jsp?prdcID=15D0B833-DAAB-4232-A96F-24F82CF07AEA"}, {"model": "AIP17PM-2T", "url": "http://online.kt.com/index.jsp?prdcID=F1611953-2B22-4A55-8A96-06F54E0DE2EE"}, {"model": "AIP17PM-256", "url": "http://online.kt.com/index.jsp?prdcID=C3FA4A96-E80A-4E1A-9B7D-6DC734AD2CF5"}, {"model": "AIP17PM-512", "url": "http://online.kt.com/index.jsp?prdcID=A127E1D4-305A-4284-AC54-E23175F29B6B"}]}, {"name": "애플 기타 / iPad", "items": [{"model": "AIPA-1T", "url": "http://online.kt.com/index.jsp?prdcID=46F2BDEE-1089-47D0-8BC5-16D03172DFF7"}, {"model": "AIPA-256", "url": "http://online.kt.com/index.jsp?prdcID=85385A34-8713-4386-BFAD-CB95808D6E2E"}, {"model": "AIPA-512", "url": "http://online.kt.com/index.jsp?prdcID=4C6FB7D6-76B7-4291-AE90-8509D6DFB3AE"}]}, {"name": "갤럭시 S23 시리즈", "items": [{"model": "SM-S911NK", "url": "http://online.kt.com/index.jsp?prdcID=BE32D4CB-3379-4336-B2A9-0AAF85B78C5A"}, {"model": "SM-S911NK512", "url": "http://online.kt.com/index.jsp?prdcID=DACF47F6-B5DB-47CC-905B-36C889FAF31E"}, {"model": "SM-S916NK", "url": "http://online.kt.com/index.jsp?prdcID=11B75870-094A-4BF7-BAC5-B2CE275CD9FC"}, {"model": "SM-S916NK512", "url": "http://online.kt.com/index.jsp?prdcID=164A21BE-3C79-4C8B-90A0-E85E4EEA498F"}, {"model": "SM-S918NK", "url": "http://online.kt.com/index.jsp?prdcID=316573F1-A36B-434C-BB27-EF45714A05F1"}, {"model": "SM-S918NK512", "url": "http://online.kt.com/index.jsp?prdcID=5824D978-D135-4796-B151-AD084790916D"}]}, {"name": "갤럭시 S24 시리즈", "items": [{"model": "SM-S721NK", "url": "http://online.kt.com/index.jsp?prdcID=F0A65BD3-AF1C-4AC6-9BF8-D321F01EDD34"}, {"model": "SM-S921NK", "url": "http://online.kt.com/index.jsp?prdcID=8FC19621-D09B-41C8-B048-549993C31F28"}, {"model": "SM-S921NK512", "url": "http://online.kt.com/index.jsp?prdcID=4CCEE2AD-0521-4306-88D5-B248DE9C5C86"}, {"model": "SM-S926NK", "url": "http://online.kt.com/index.jsp?prdcID=6AD57EE2-2076-4DFD-8179-21B307E6AABD"}, {"model": "SM-S926NK512", "url": "http://online.kt.com/index.jsp?prdcID=0E0B0901-F3CE-409D-9A11-865BA79CC5A4"}, {"model": "SM-S928NK", "url": "http://online.kt.com/index.jsp?prdcID=050162F9-76B4-4B4D-931D-5DC36FD37AD3"}, {"model": "SM-S928NK1T", "url": "http://online.kt.com/index.jsp?prdcID=11106EB3-7914-40DE-9423-6BF059E6D7EF"}, {"model": "SM-S928NK512", "url": "http://online.kt.com/index.jsp?prdcID=1DCFED43-AA88-4665-9963-097B0D6035D7"}]}, {"name": "갤럭시 S25 시리즈", "items": [{"model": "SM-S731NK", "url": "http://online.kt.com/index.jsp?prdcID=E9A8FD4C-3017-470D-9B82-FAFEED21FC84"}, {"model": "SM-S931NK", "url": "http://online.kt.com/index.jsp?prdcID=131E390C-46BA-44FC-A237-6BEE6D5AABC6"}, {"model": "SM-S931NK512", "url": "http://online.kt.com/index.jsp?prdcID=BD07DCE1-90A2-4059-82D6-8AB1BBAC6EF9"}, {"model": "SM-S936NK", "url": "http://online.kt.com/index.jsp?prdcID=2D993B4C-7A07-4840-AAF9-BD0F257D9B36"}, {"model": "SM-S936NK512", "url": "http://online.kt.com/index.jsp?prdcID=379B2609-09D2-4A11-8E87-17D6DB89DB0C"}, {"model": "SM-S937NK", "url": "http://online.kt.com/index.jsp?prdcID=727A6B26-3C6A-4734-8CD0-7A4B8F106B9B"}, {"model": "SM-S937NK512", "url": "http://online.kt.com/index.jsp?prdcID=321B2554-76DA-4260-8425-E4EEC5757AAD"}, {"model": "SM-S938NK", "url": "http://online.kt.com/index.jsp?prdcID=DD379671-BC3D-43D5-AC97-10B5793A00F7"}, {"model": "SM-S938NK1T", "url": "http://online.kt.com/index.jsp?prdcID=DE2DAA7C-9C53-4EF8-AB22-040246336FB1"}, {"model": "SM-S938NK512", "url": "http://online.kt.com/index.jsp?prdcID=CD75C06E-DCD8-4936-8353-B80F91C816CE"}]}, {"name": "갤럭시 S26 시리즈", "items": [{"model": "SM-S942NK", "url": "http://online.kt.com/index.jsp?prdcID=BE3B5164-6F2A-463F-81F2-C0CB0C6F2A15"}, {"model": "SM-S942NK512", "url": "http://online.kt.com/index.jsp?prdcID=7E0F0D46-749D-48D7-907A-B5D710E9BFAB"}, {"model": "SM-S947NK", "url": "http://online.kt.com/index.jsp?prdcID=D3650420-4496-4BF6-9576-1B32CC8DEA97"}, {"model": "SM-S947NK512", "url": "http://online.kt.com/index.jsp?prdcID=0CF1D681-43E5-40A8-A466-FA3C81492719"}, {"model": "SM-S948NK", "url": "http://online.kt.com/index.jsp?prdcID=AE7428E0-0618-418B-AF79-AFDD3E482011"}, {"model": "SM-S948NK1T", "url": "http://online.kt.com/index.jsp?prdcID=905258C9-C10A-4D74-89EE-9183280B33F0"}, {"model": "SM-S948NK512", "url": "http://online.kt.com/index.jsp?prdcID=1DDDBE90-7108-433B-AC77-8716BDD8F92B"}]}, {"name": "갤럭시 Z Flip 시리즈", "items": [{"model": "SM-F731NK", "url": "http://online.kt.com/index.jsp?prdcID=47E8F45B-9E7A-4404-B00E-8CBB90DB80FE"}, {"model": "SM-F731NK512", "url": "http://online.kt.com/index.jsp?prdcID=5B684399-4BD5-44E0-8D6F-69C1C1B8C3FD"}, {"model": "SM-F741NK", "url": "http://online.kt.com/index.jsp?prdcID=74D0C141-616A-48D4-9AD9-B426E90A9DE6"}, {"model": "SM-F741NK512", "url": "http://online.kt.com/index.jsp?prdcID=E3A58B79-E28A-4001-B3D3-1C96AAB71917"}, {"model": "SM-F761NK", "url": "http://online.kt.com/index.jsp?prdcID=AF5556B0-C8E6-4B6C-8C69-08E755D13407"}, {"model": "SM-F766NK", "url": "http://online.kt.com/index.jsp?prdcID=4584A0FC-9DDB-47F8-BE25-7299F20C51C7"}, {"model": "SM-F766NK512", "url": "http://online.kt.com/index.jsp?prdcID=CED07BDE-6B21-4DEF-A82B-A4C87864EF9B"}]}, {"name": "갤럭시 Z Fold 시리즈", "items": [{"model": "SM-F946NK", "url": "http://online.kt.com/index.jsp?prdcID=4CA4C481-948E-4790-9253-7928EA888DB6"}, {"model": "SM-F946NK512", "url": "http://online.kt.com/index.jsp?prdcID=52E57C75-907C-424F-96FA-A977509BCA48"}, {"model": "SM-F956NK", "url": "http://online.kt.com/index.jsp?prdcID=E6BBE7AE-9E0F-47EB-942D-A61CC3D5A234"}, {"model": "SM-F956NK1T", "url": "http://online.kt.com/index.jsp?prdcID=5F83919C-5DE3-4D87-BFD2-980C5ECEC3F4"}, {"model": "SM-F956NK512", "url": "http://online.kt.com/index.jsp?prdcID=D2E30A6C-BFC3-4DFD-B39A-CDCA58D4C2D5"}, {"model": "SM-F966NK", "url": "http://online.kt.com/index.jsp?prdcID=2D01E689-CDDC-469D-83A0-7902F14A9C42"}, {"model": "SM-F966NK1T", "url": "http://online.kt.com/index.jsp?prdcID=34CD1D2B-9B14-48DC-8D60-E7941767AFB1"}, {"model": "SM-F966NK512", "url": "http://online.kt.com/index.jsp?prdcID=9A4E06AC-243B-438F-BD55-C3AB27CD1587"}]}, {"name": "갤럭시 A/M · 기타 단말", "items": [{"model": "AT-M130K", "url": "http://online.kt.com/index.jsp?prdcID=AAE56174-D6CC-4FD1-8B4A-0FDBFF85F131"}, {"model": "MI-RMN13P5GK512", "url": "http://online.kt.com/index.jsp?prdcID=90ED6884-46A4-4C10-B263-849B05716CD6"}, {"model": "SM-A155NK", "url": "http://online.kt.com/index.jsp?prdcID=73648F3C-2894-4B37-81AF-F45EEC1A6A8F"}, {"model": "SM-A165NK", "url": "http://online.kt.com/index.jsp?prdcID=E9190ACD-2A7D-4C66-8494-01B9AD1C2B39"}, {"model": "SM-A165NK-KP", "url": "http://online.kt.com/index.jsp?prdcID=741B4F70-CA69-4F0B-A35D-FD81AEE44BC1"}, {"model": "SM-M366K-MOM", "url": "http://online.kt.com/index.jsp?prdcID=B7458CE0-7E16-4300-909F-82734039A4EF"}]}, {"name": "워치 / 웨어러블", "items": [{"model": "SM-L305NK", "url": "http://online.kt.com/index.jsp?prdcID=B3BC755C-09A6-4000-AF85-DF9BBD370885"}, {"model": "SM-L315NK", "url": "http://online.kt.com/index.jsp?prdcID=E0DFA6B7-3682-45F6-800F-F9E88B4AE2D3"}, {"model": "SM-L325NK", "url": "http://online.kt.com/index.jsp?prdcID=064D06DA-CD07-40A3-BCDE-C65F74E85F41"}, {"model": "SM-L335NK", "url": "http://online.kt.com/index.jsp?prdcID=677A315F-2E35-429B-8AD7-246EDC7897E5"}, {"model": "SM-L505NK", "url": "http://online.kt.com/index.jsp?prdcID=1EAB6D02-A4CE-4392-9FD2-8EB8581AE313"}, {"model": "SM-L705NK", "url": "http://online.kt.com/index.jsp?prdcID=9B0F28F7-DD7A-4C5B-BB81-13061CC11FD0"}, {"model": "SM-R905NK", "url": "http://online.kt.com/index.jsp?prdcID=BA844BD1-BA58-49C7-82EB-7456FA8D8C09"}, {"model": "SM-R915NK", "url": "http://online.kt.com/index.jsp?prdcID=2A72D93F-F730-4D51-8B32-43204E17F12B"}, {"model": "SM-R935NK", "url": "http://online.kt.com/index.jsp?prdcID=CC71B6F1-1AAF-4D3D-9420-81F076F3FBD7"}, {"model": "SM-R945NK", "url": "http://online.kt.com/index.jsp?prdcID=6C87BFDE-AF68-4804-9591-24F32C9D9B78"}, {"model": "SM-R955NK", "url": "http://online.kt.com/index.jsp?prdcID=53CD5B47-FECD-468F-856C-5D7CE0607B01"}, {"model": "SM-R965NK", "url": "http://online.kt.com/index.jsp?prdcID=13DF835B-F9D1-4D26-81FC-5F5DF6B4F29F"}]}, {"name": "기타 접수", "items": [{"model": "유선", "url": "https://online.kt.com/itg/simple/simpleCustomerInfoPop.do?prdcId=225089A4-297C-49F6-B5DF-8226D48543BB"}, {"model": "유심단독", "url": "http://online.kt.com/index.jsp?prdcID=AFB53030-8E5D-4469-ABB4-2C1250CF803D"}]}];
+
+const list = document.getElementById('list');
+const stats = document.getElementById('stats');
+const empty = document.getElementById('empty');
+const toast = document.getElementById('toast');
+
+function escapeHtml(str) {
+  return String(str).replace(/[&<>"']/g, s => ({
+    '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#039;'
+  }[s]));
 }
 
-list.addEventListener('click', async (e) => {
-  const btn = e.target.closest('button.copy');
-  if (!btn) return;
-  const url = btn.dataset.url;
+function render() {
+  const q = '';
+  let total = 0;
+  let html = '';
+
+  DATA.forEach(group => {
+    const filtered = group.items;
+    if (!filtered.length) return;
+
+    total += filtered.length;
+    html += `<details data-group="${escapeHtml(group.name)}">`;
+    html += `<summary><span>${escapeHtml(group.name)}</span><span class="count">${filtered.length}개</span></summary>`;
+    html += '<div class="items">';
+    filtered.forEach(item => {
+      html += `
+        <div class="item" data-model="${escapeHtml(item.model)}"> 
+          <div class="model">${escapeHtml(item.model)}</div>
+          <div class="actions">
+            <a class="btn open" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">접수 열기</a>
+            <button class="btn copy" type="button" data-url="${escapeHtml(item.url)}" data-model="${escapeHtml(item.model)}">링크 복사</button>
+          </div>
+        </div>
+      `;
+    });
+    html += '</div></details>';
+  });
+
+  list.innerHTML = html;
+  stats.textContent = `총 ${DATA.reduce((a,g)=>a+g.items.length,0)}개 / ${DATA.length}개 그룹`;
+  empty.style.display = total ? 'none' : 'block';
+}
+
+function showToast(text) {
+  toast.textContent = text;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 1400);
+}
+
+async function copyText(text) {
   try {
-    await navigator.clipboard.writeText(url);
-    btn.textContent = '복사 완료';
-    btn.classList.add('ok');
-    setTimeout(() => { btn.textContent = '링크 복사'; btn.classList.remove('ok'); }, 1200);
-  } catch(err) {
-    const ta = document.createElement('textarea');
-    ta.value = url; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
-    btn.textContent = '복사 완료';
-    btn.classList.add('ok');
-    setTimeout(() => { btn.textContent = '링크 복사'; btn.classList.remove('ok'); }, 1200);
+    await navigator.clipboard.writeText(text);
+    showToast('링크 복사 완료');
+  } catch (e) {
+    const t = document.createElement('textarea');
+    t.value = text;
+    document.body.appendChild(t);
+    t.select();
+    document.execCommand('copy');
+    document.body.removeChild(t);
+    showToast('링크 복사 완료');
   }
+}
+
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('.copy');
+  if (!btn) return;
+  copyText(btn.dataset.url);
 });
-q.addEventListener('input', () => render(q.value));
+
+
+document.getElementById('openAll').addEventListener('click', () => {
+  document.querySelectorAll('details').forEach(d => d.open = true);
+});
+document.getElementById('closeAll').addEventListener('click', () => {
+  document.querySelectorAll('details').forEach(d => d.open = false);
+});
+
 render();
 </script>
 </body>
