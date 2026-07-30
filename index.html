@@ -318,6 +318,11 @@ document.getElementById('closeAll').addEventListener('click', () => {
   document.querySelectorAll('details').forEach(d => d.open = false);
 });
 
+const iphone16Group = DATA.find(group => group.name === '아이폰 16 시리즈');
+if (iphone16Group && !iphone16Group.items.some(item => item.model === '16E-256')) {
+  iphone16Group.items.splice(3, 0, {"model":"16E-256","url":"https://online.kt.com/itg/online/index.do?prdcId=EDD23376-A6A3-40BD-9D42-32CE9B7D22C2"});
+}
+
 render();
 </script>
 </body>
