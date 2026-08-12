@@ -324,6 +324,65 @@ if (iphone16Group && !iphone16Group.items.some(item => item.model === '16E-256')
 }
 
 render();
+
+function getZSeriesLabel(groupName, model) {
+  if (groupName === '갤럭시 Z Flip 시리즈') {
+    if (model.startsWith('SM-F731')) return 'Z Flip5';
+    if (model.startsWith('SM-F741')) return 'Z Flip6';
+    if (model.startsWith('SM-F761') || model.startsWith('SM-F766')) return 'Z Flip7';
+    if (model.startsWith('SM-F776')) return 'Z Flip8';
+  }
+  if (groupName === '갤럭시 Z Fold 시리즈') {
+    if (model.startsWith('SM-F946')) return 'Z Fold5';
+    if (model.startsWith('SM-F956')) return 'Z Fold6';
+    if (model.startsWith('SM-F966')) return 'Z Fold7';
+    if (model.startsWith('SM-F971') || model.startsWith('SM-F976')) return 'Z Fold8';
+  }
+  return '';
+}
+
+function addZSeriesDividers() {
+  ['갤럭시 Z Flip 시리즈', '갤럭시 Z Fold 시리즈'].forEach(groupName => {
+    const details = document.querySelector(`details[data-group="${groupName}"]`);
+    if (!details) return;
+    const items = details.querySelector('.items');
+    if (!items) return;
+
+    let previousLabel = '';
+    [...items.querySelectorAll('.item')].forEach(card => {
+      const model = card.dataset.model || '';
+      const label = getZSeriesLabel(groupName, model);
+      if (!label || label === previousLabel) return;
+
+      const divider = document.createElement('div');
+      divider.style.gridColumn = '1 / -1';
+      divider.style.display = 'flex';
+      divider.style.alignItems = 'center';
+      divider.style.gap = '10px';
+      divider.style.margin = previousLabel ? '12px 2px 2px' : '2px 2px';
+
+      const left = document.createElement('span');
+      left.style.height = '1px';
+      left.style.background = '#dbe3ef';
+      left.style.flex = '1';
+
+      const text = document.createElement('span');
+      text.textContent = label;
+      text.style.fontSize = '12px';
+      text.style.fontWeight = '800';
+      text.style.color = '#2563eb';
+      text.style.whiteSpace = 'nowrap';
+      text.style.letterSpacing = '-0.02em';
+
+      const right = left.cloneNode();
+      divider.append(left, text, right);
+      items.insertBefore(divider, card);
+      previousLabel = label;
+    });
+  });
+}
+
+addZSeriesDividers();
 </script>
 </body>
 </html>
